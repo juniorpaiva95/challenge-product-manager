@@ -6,9 +6,8 @@ import Image from "next/image";
 import { Pagination } from "@/components/ui/pagination";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { useProductStore } from "@/store/useProductStore";
 
-// Novo tipo de produto com todos os campos
 type Product = {
   id: number;
   name: string;
@@ -23,8 +22,9 @@ const PRODUCTS_PER_PAGE = 8;
 export default function ProductList() {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [search, setSearch] = useState("");
+  const search = useProductStore((s) => s.search);
+  const currentPage = useProductStore((s) => s.currentPage);
+  const setCurrentPage = useProductStore((s) => s.setCurrentPage);
 
   useEffect(() => {
     fetch("http://localhost:3001/products")
@@ -34,10 +34,6 @@ export default function ProductList() {
         setLoading(false);
       });
   }, []);
-
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [search]);
 
   if (loading) {
     return <div className="flex justify-center items-center h-64">Carregando...</div>;
@@ -62,22 +58,6 @@ export default function ProductList() {
 
   return (
     <div className="container mx-auto py-8">
-      {/* Header moderno */}
-      <header className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-8 p-4 rounded-lg bg-gradient-to-r from-blue-600 to-blue-400 shadow-lg">
-        <div className="flex items-center gap-3">
-          <Image src="/next.svg" alt="Logo" width={40} height={40} />
-          <span className="text-2xl font-bold text-white tracking-tight">TechStore</span>
-        </div>
-        <div className="w-full sm:w-96">
-          <Input
-            type="text"
-            placeholder="Buscar produtos..."
-            value={search}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)}
-            className="bg-white/90 focus:bg-white border border-gray-200 focus:border-blue-500 shadow-sm"
-          />
-        </div>
-      </header>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
         {paginatedProducts.map((product) => (
           <Card key={product.id} className="flex flex-col h-full shadow-md hover:shadow-xl transition border border-gray-100">
