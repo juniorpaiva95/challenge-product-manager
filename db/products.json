@@ -6,7 +6,7 @@
       "category": "Notebook",
       "price": 3500,
       "description": "Notebook Dell Inspiron 15 com Intel Core i5, 8GB RAM, 256GB SSD.",
-      "image": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8"
+      "imageUrl": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8"
     },
     {
       "id": 2,
@@ -14,7 +14,7 @@
       "category": "Acessório",
       "price": 450,
       "description": "Mouse sem fio Logitech MX Master 3, recarregável, Bluetooth.",
-      "image": "https://images.unsplash.com/photo-1519389950473-47ba0277781c"
+      "imageUrl": "https://images.unsplash.com/photo-1519389950473-47ba0277781c"
     },
     {
       "id": 3,
@@ -22,7 +22,7 @@
       "category": "Acessório",
       "price": 250,
       "description": "Teclado mecânico Redragon Kumara, switches Outemu Blue, LED vermelho.",
-      "image": "https://images.unsplash.com/photo-1519241047957-be31d7379a5d"
+      "imageUrl": "https://images.unsplash.com/photo-1519241047957-be31d7379a5d"
     },
     {
       "id": 4,
@@ -30,7 +30,7 @@
       "category": "Monitor",
       "price": 1200,
       "description": "Monitor LG UltraWide 29 polegadas, Full HD, HDMI.",
-      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308"
+      "imageUrl": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308"
     },
     {
       "id": 5,
@@ -38,7 +38,7 @@
       "category": "Smartphone",
       "price": 4200,
       "description": "Samsung Galaxy S23, 128GB, 8GB RAM, câmera tripla.",
-      "image": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9"
+      "imageUrl": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9"
     },
     {
       "id": 6,
@@ -46,7 +46,7 @@
       "category": "Áudio",
       "price": 1500,
       "description": "Fone de ouvido Bluetooth Sony WH-1000XM4, cancelamento de ruído.",
-      "image": "https://images.unsplash.com/photo-1511367461989-f85a21fda167"
+      "imageUrl": "https://images.unsplash.com/photo-1511367461989-f85a21fda167"
     },
     {
       "id": 7,
@@ -54,7 +54,7 @@
       "category": "Tablet",
       "price": 3200,
       "description": "Apple iPad 9ª Geração, 64GB, Wi-Fi, tela Retina 10.2\".",
-      "image": "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2"
+      "imageUrl": "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2"
     },
     {
       "id": 8,
@@ -62,7 +62,7 @@
       "category": "Armazenamento",
       "price": 250,
       "description": "SSD Kingston A400, 480GB, SATA III, 2.5\".",
-      "image": "https://images.unsplash.com/photo-1465101046530-73398c7f28ca"
+      "imageUrl": "https://images.unsplash.com/photo-1465101046530-73398c7f28ca"
     },
     {
       "id": 9,
@@ -70,7 +70,7 @@
       "category": "Hardware",
       "price": 2500,
       "description": "Placa de vídeo NVIDIA GeForce RTX 3060, 12GB GDDR6.",
-      "image": "https://images.unsplash.com/photo-1518770660439-4636190af475"
+      "imageUrl": "https://images.unsplash.com/photo-1518770660439-4636190af475"
     },
     {
       "id": 10,
@@ -78,7 +78,7 @@
       "category": "Rede",
       "price": 600,
       "description": "Roteador Wi-Fi 6 TP-Link Archer AX50, Dual Band, 2402Mbps.",
-      "image": "https://images.unsplash.com/photo-1509395176047-4a66953fd231"
+      "imageUrl": "https://images.unsplash.com/photo-1509395176047-4a66953fd231"
     },
     {
       "id": 11,
@@ -86,7 +86,7 @@
       "category": "Acessório",
       "price": 350,
       "description": "Webcam Logitech C920, Full HD 1080p, microfone embutido.",
-      "image": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8"
+      "imageUrl": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8"
     },
     {
       "id": 12,
@@ -94,7 +94,7 @@
       "category": "Impressora",
       "price": 500,
       "description": "Impressora multifuncional HP DeskJet Ink Advantage 2774, Wi-Fi.",
-      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308"
+      "imageUrl": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308"
     },
     {
       "id": 13,
@@ -102,7 +102,7 @@
       "category": "Câmera",
       "price": 3200,
       "description": "GoPro HERO10 Black, 5.3K60 Ultra HD, à prova d'água.",
-      "image": "https://images.unsplash.com/photo-1465101178521-c1a9136a3b99"
+      "imageUrl": "https://images.unsplash.com/photo-1465101178521-c1a9136a3b99"
     },
     {
       "id": 14,
@@ -110,7 +110,7 @@
       "category": "Console",
       "price": 4500,
       "description": "Sony PlayStation 5, 825GB SSD, DualSense.",
-      "image": "/images/playstation-5.jpg"
+      "imageUrl": "/images/playstation-5.jpg"
     },
     {
       "id": 15,
@@ -118,7 +118,7 @@
       "category": "Leitor Digital",
       "price": 700,
       "description": "Kindle Paperwhite 11ª Geração, 8GB, tela 6.8\".",
-      "image": "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2"
+      "imageUrl": "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2"
     },
     {
       "id": 16,
@@ -126,7 +126,7 @@
       "category": "Wearable",
       "price": 2200,
       "description": "Apple Watch SE, GPS, 40mm, pulseira esportiva.",
-      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308"
+      "imageUrl": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308"
     },
     {
       "id": 17,
@@ -134,7 +134,7 @@
       "category": "Armazenamento",
       "price": 400,
       "description": "HD Externo Seagate Expansion, 2TB, USB 3.0.",
-      "image": "https://images.unsplash.com/photo-1465101046530-73398c7f28ca"
+      "imageUrl": "https://images.unsplash.com/photo-1465101046530-73398c7f28ca"
     },
     {
       "id": 18,
@@ -142,7 +142,7 @@
       "category": "Hardware",
       "price": 600,
       "description": "Placa-mãe ASUS Prime B450M Gaming/BR, AM4, DDR4.",
-      "image": "https://images.unsplash.com/photo-1518770660439-4636190af475"
+      "imageUrl": "https://images.unsplash.com/photo-1518770660439-4636190af475"
     },
     {
       "id": 19,
@@ -150,7 +150,7 @@
       "category": "Áudio",
       "price": 600,
       "description": "Caixa de som Bluetooth JBL Flip 6, à prova d'água.",
-      "image": "/images/jbl-flip6.jpg"
+      "imageUrl": "/images/jbl-flip6.jpg"
     },
     {
       "id": 20,
@@ -158,7 +158,31 @@
       "category": "Monitor",
       "price": 2200,
       "description": "Monitor Gamer Samsung Odyssey, 27\", 165Hz, 1ms.",
-      "image": "/images/g5-odissey.jpg"
+      "imageUrl": "/images/g5-odissey.jpg"
+    },
+    {
+      "id": "4f4d",
+      "name": "Teste",
+      "category": "Teste",
+      "price": 1230,
+      "description": "Testando",
+      "imageUrl": "https://images.unsplash.com/photo-1465101178521-c1a9136a3b99"
+    },
+    {
+      "id": "0c19",
+      "name": "Teste",
+      "category": "Teste",
+      "price": 123,
+      "description": "asd",
+      "imageUrl": "/images/g5-odissey.jpg"
+    },
+    {
+      "id": "90b2",
+      "name": "teste",
+      "category": "teste",
+      "price": 123,
+      "description": "123",
+      "imageUrl": "/images/g5-odissey.jpg"
     }
   ]
 }
