@@ -3,6 +3,10 @@
 import { useEffect, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Image from "next/image";
+import { Pagination } from "@/components/ui/pagination";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 // Novo tipo de produto com todos os campos
 type Product = {
@@ -14,28 +18,68 @@ type Product = {
   image: string;
 };
 
+const PRODUCTS_PER_PAGE = 8;
+
 export default function ProductList() {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     fetch("http://localhost:3001/products")
       .then((res) => res.json())
       .then((data) => {
-        setProducts(data.products || data); // Suporta ambos formatos
+        setProducts(data.products || data);
         setLoading(false);
       });
   }, []);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [search]);
 
   if (loading) {
     return <div className="flex justify-center items-center h-64">Carregando...</div>;
   }
 
+  // Filtro de busca
+  const filteredProducts = products.filter((product) =>
+    product.name.toLowerCase().includes(search.toLowerCase())
+  );
+
+  // Paginação
+  const totalPages = Math.ceil(filteredProducts.length / PRODUCTS_PER_PAGE);
+  const startIdx = (currentPage - 1) * PRODUCTS_PER_PAGE;
+  const endIdx = startIdx + PRODUCTS_PER_PAGE;
+  const paginatedProducts = filteredProducts.slice(startIdx, endIdx);
+
+  const handlePageChange = (page: number) => {
+    if (page >= 1 && page <= totalPages) {
+      setCurrentPage(page);
+    }
+  };
+
   return (
     <div className="container mx-auto py-8">
-      <h1 className="text-3xl font-bold mb-8 text-center">Produtos de Tecnologia</h1>
+      {/* Header moderno */}
+      <header className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-8 p-4 rounded-lg bg-gradient-to-r from-blue-600 to-blue-400 shadow-lg">
+        <div className="flex items-center gap-3">
+          <Image src="/next.svg" alt="Logo" width={40} height={40} />
+          <span className="text-2xl font-bold text-white tracking-tight">TechStore</span>
+        </div>
+        <div className="w-full sm:w-96">
+          <Input
+            type="text"
+            placeholder="Buscar produtos..."
+            value={search}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)}
+            className="bg-white/90 focus:bg-white border border-gray-200 focus:border-blue-500 shadow-sm"
+          />
+        </div>
+      </header>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-        {products.map((product) => (
+        {paginatedProducts.map((product) => (
           <Card key={product.id} className="flex flex-col h-full shadow-md hover:shadow-xl transition border border-gray-100">
             <div className="h-48 w-full bg-gray-100 flex items-center justify-center overflow-hidden rounded-t">
               <Image
@@ -48,18 +92,44 @@ export default function ProductList() {
             </div>
             <CardHeader className="pb-2">
               <CardTitle className="text-lg font-semibold line-clamp-1">{product.name}</CardTitle>
-              <span className="text-xs text-gray-500 mt-1">{product.category}</span>
+              <Badge variant="outline">{product.category}</Badge>
             </CardHeader>
             <CardContent className="flex flex-col flex-1 justify-between gap-2">
               <p className="text-gray-700 text-sm line-clamp-2 mb-2">{product.description}</p>
               <div className="flex items-center justify-between mt-auto">
                 <span className="font-bold text-blue-600 text-lg">R$ {product.price.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span>
-                <button className="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 text-sm transition">Comprar</button>
+                <Button className="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 text-sm transition">Comprar</Button>
               </div>
             </CardContent>
           </Card>
         ))}
       </div>
+      {/* Paginação */}
+      <Pagination className="mt-10">
+        <button
+          className="px-3 py-1 mx-1 rounded border border-gray-300 bg-white hover:bg-gray-100 disabled:opacity-50"
+          onClick={() => handlePageChange(currentPage - 1)}
+          disabled={currentPage === 1}
+        >
+          Anterior
+        </button>
+        {Array.from({ length: totalPages }, (_, i) => (
+          <button
+            key={i + 1}
+            className={`px-3 py-1 mx-1 rounded border border-gray-300 ${currentPage === i + 1 ? 'bg-blue-600 text-white' : 'bg-white hover:bg-gray-100'}`}
+            onClick={() => handlePageChange(i + 1)}
+          >
+            {i + 1}
+          </button>
+        ))}
+        <button
+          className="px-3 py-1 mx-1 rounded border border-gray-300 bg-white hover:bg-gray-100 disabled:opacity-50"
+          onClick={() => handlePageChange(currentPage + 1)}
+          disabled={currentPage === totalPages}
+        >
+          Próxima
+        </button>
+      </Pagination>
     </div>
   );
 }
