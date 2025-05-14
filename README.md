@@ -1,6 +1,6 @@
 # Product Manager
+![image](https://github.com/user-attachments/assets/9e65deca-4f76-48ae-9d1f-95a20867f183)
 
-![Banner do Projeto](./public/assets/banner.png)
 
 ## ✨ Sobre o Projeto
 
@@ -85,8 +85,6 @@ O projeto foi criado como desafio técnico para demonstrar habilidades com Next.
 
 ## 📸 Screenshots
 
-Adicione aqui suas imagens do projeto:
-
 | Listagem de Produtos | Filtros & Cadastro | Responsivo |
 |----------------------|-------------------|------------|
-| ![screenshot1](image.png) | ![screenshot2](./public/assets/screenshot2.png) | ![screenshot3](./public/assets/screenshot3.png) |
+| ![image](https://github.com/user-attachments/assets/9e65deca-4f76-48ae-9d1f-95a20867f183) | ![image](https://github.com/user-attachments/assets/b3419eb7-d266-423e-a3dd-b22c116bb977) | ![image](https://github.com/user-attachments/assets/710fdc17-8b93-4ef2-85fd-4b8594762408)
