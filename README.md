@@ -1,6 +1,7 @@
 # Product Manager
 ![image](https://github.com/user-attachments/assets/9e65deca-4f76-48ae-9d1f-95a20867f183)
 
+Confira em: https://challenge-product-manager.vercel.app/products
 
 ## ✨ Sobre o Projeto
 
