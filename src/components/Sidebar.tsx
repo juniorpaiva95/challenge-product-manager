@@ -3,7 +3,7 @@ import React from "react";
 import { PackageIcon, PlusCircleIcon } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import Link from "next/link";
-
+import { usePathname } from "next/navigation";
 interface SidebarProps {
   isOpen: boolean;
   toggleSidebar: () => void;
@@ -11,6 +11,7 @@ interface SidebarProps {
 
 const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
   const isMobile = useIsMobile();
+  const pathname = usePathname();
   
   if (isMobile && !isOpen) return null;
   
@@ -44,7 +45,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
           <Link
             href="/products"
             className={`flex items-center space-x-3 px-3 py-2 rounded-lg ${
-              window.location.pathname === "/products"
+              pathname === "/products"
                 ? "bg-blue-50 text-blue-600 font-medium"
                 : "text-gray-600 hover:bg-blue-50 hover:text-blue-600"
             }`}
@@ -55,7 +56,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
           <Link
             href="/products/new"
             className={`flex items-center space-x-3 px-3 py-2 rounded-lg ${
-              window.location.pathname === "/products/new"
+              pathname === "/products/new"
                 ? "bg-blue-50 text-blue-600 font-medium"
                 : "text-gray-600 hover:bg-blue-50 hover:text-blue-600"
             }`}
