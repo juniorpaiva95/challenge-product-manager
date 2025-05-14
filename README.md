@@ -1,36 +1,92 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Product Manager
 
-## Getting Started
+![Banner do Projeto](./public/assets/banner.png)
 
-First, run the development server:
+## ✨ Sobre o Projeto
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+O **Product Manager** é uma aplicação web para gerenciamento de produtos, desenvolvida com foco em boas práticas de frontend moderno. Permite listar, filtrar, cadastrar e visualizar produtos de tecnologia, com uma interface responsiva e amigável.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+O projeto foi criado como desafio técnico para demonstrar habilidades com Next.js, gerenciamento de estado, consumo de APIs, estilização com Tailwind CSS, componentes shadcn-ui e testes.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🚀 Tecnologias & Bibliotecas
 
-## Learn More
+- [Next.js](https://nextjs.org/) (App Router)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [shadcn/ui](https://ui.shadcn.com/) (componentes UI modernos)
+- [Zustand](https://zustand-demo.pmnd.rs/) (gerenciamento de estado global)
+- [json-server](https://github.com/typicode/json-server) (API fake REST)
+- [Sonner](https://sonner.emilkowal.ski/) (notificações)
+- [Lucide React](https://lucide.dev/) (ícones)
+- [Jest](https://jestjs.io/) + [React Testing Library](https://testing-library.com/) (testes)
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🖥️ Funcionalidades
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Listagem de produtos com paginação
+- Filtros por nome, faixa de preço (slider e input), ordenação
+- Cadastro de novos produtos
+- Visualização de imagem (preview)
+- Interface responsiva e acessível
+- Feedback visual com loading e notificações
+- Componentização e organização de código
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## ⚡ Como rodar localmente
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. **Clone o repositório**
+   ```bash
+   git clone https://github.com/juniorpaiva95/challenge-product-manager.git
+   cd challenge-product-manager
+   ```
+
+2. **Instale as dependências**
+   ```bash
+   npm install
+   ```
+
+3. **Rode o json-server (API fake)**
+   ```bash
+   npm run json-server
+   # A API estará em http://localhost:3001/products
+   ```
+
+4. **Rode o projeto Next.js**
+   ```bash
+   npm run dev
+   # Acesse http://localhost:3000
+   ```
+
+---
+
+## 📦 Scripts disponíveis
+
+- `npm run dev` — inicia o servidor Next.js em modo desenvolvimento
+- `npm run build` — build de produção
+- `npm run start` — inicia o servidor em produção
+- `npm run json-server` — inicia a API fake com json-server
+
+---
+
+## 🛠️ Pontos de melhoria & ideias futuras
+
+- Adicionar testes automatizados (unitários e de integração)
+- Implementar autenticação e autorização
+- Adicionar edição e exclusão de produtos
+- Melhorar UX do formulário (validação com YUP ou ZOD, upload de imagem)
+- Internacionalização (i18n)
+- Melhorar acessibilidade (a11y)
+
+---
+
+## 📸 Screenshots
+
+Adicione aqui suas imagens do projeto:
+
+| Listagem de Produtos | Filtros & Cadastro | Responsivo |
+|----------------------|-------------------|------------|
+| ![screenshot1](image.png) | ![screenshot2](./public/assets/screenshot2.png) | ![screenshot3](./public/assets/screenshot3.png) |
