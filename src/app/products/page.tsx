@@ -79,18 +79,18 @@ export default function ProductListPage() {
     filterAndSortProducts();
   }, [products, searchTerm, priceRange, sortOption]);
 
-  const handleAddProduct = async (
-    newProduct: Omit<Product, "id" | "createdAt">
-  ) => {
-    try {
-      const addedProduct = await createProduct(newProduct);
-      setProducts((prev) => [...prev, addedProduct]);
-      return Promise.resolve();
-    } catch (error) {
-      console.error("Error adding product:", error);
-      return Promise.reject(error);
-    }
-  };
+  // const handleAddProduct = async (
+  //   newProduct: Omit<Product, "id" | "createdAt">
+  // ) => {
+  //   try {
+  //     const addedProduct = await createProduct(newProduct);
+  //     setProducts((prev) => [...prev, addedProduct]);
+  //     return Promise.resolve();
+  //   } catch (error) {
+  //     console.error("Error adding product:", error);
+  //     return Promise.reject(error);
+  //   }
+  // };
 
   return (
     <div className="max-w-7xl mx-auto">
@@ -110,8 +110,9 @@ export default function ProductListPage() {
             onSearchChange={setSearchTerm}
             onPriceRangeChange={setPriceRange}
             onSortChange={setSortOption}
+            onPageChange={goToPage}
           />
-          <ProductForm onAddProduct={handleAddProduct} />
+          {/* <ProductForm onAddProduct={handleAddProduct} /> */}
         </div>
 
         {/* Main content with product list */}

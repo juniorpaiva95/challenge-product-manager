@@ -1,7 +1,8 @@
 
 import React from "react";
-import { HomeIcon, PackageIcon, PlusCircleIcon, SettingsIcon } from "lucide-react";
+import { PackageIcon, PlusCircleIcon } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
+import Link from "next/link";
 
 interface SidebarProps {
   isOpen: boolean;
@@ -40,39 +41,29 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
         
         {/* Nav links */}
         <nav className="flex-1 p-4 space-y-1">
-          <a
-            href="#"
-            className="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-600 hover:bg-blue-50 hover:text-blue-600"
-          >
-            <HomeIcon className="h-5 w-5" />
-            <span>Dashboard</span>
-          </a>
-          <a
-            href="#"
-            className="flex items-center space-x-3 px-3 py-2 rounded-lg bg-blue-50 text-blue-600 font-medium"
+          <Link
+            href="/products"
+            className={`flex items-center space-x-3 px-3 py-2 rounded-lg ${
+              window.location.pathname === "/products"
+                ? "bg-blue-50 text-blue-600 font-medium"
+                : "text-gray-600 hover:bg-blue-50 hover:text-blue-600"
+            }`}
           >
             <PackageIcon className="h-5 w-5" />
             <span>Produtos</span>
-          </a>
-          <a
-            href="#"
-            className="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-600 hover:bg-blue-50 hover:text-blue-600"
+          </Link>
+          <Link
+            href="/products/new"
+            className={`flex items-center space-x-3 px-3 py-2 rounded-lg ${
+              window.location.pathname === "/products/new"
+                ? "bg-blue-50 text-blue-600 font-medium"
+                : "text-gray-600 hover:bg-blue-50 hover:text-blue-600"
+            }`}
           >
             <PlusCircleIcon className="h-5 w-5" />
             <span>Adicionar Produto</span>
-          </a>
+          </Link>
         </nav>
-        
-        {/* Footer */}
-        <div className="p-4 border-t">
-          <a
-            href="#"
-            className="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-600 hover:bg-blue-50 hover:text-blue-600"
-          >
-            <SettingsIcon className="h-5 w-5" />
-            <span>Configurações</span>
-          </a>
-        </div>
       </div>
     </>
   );

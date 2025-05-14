@@ -11,12 +11,14 @@ interface SearchFiltersProps {
   onSearchChange: (search: string) => void;
   onPriceRangeChange: (range: PriceRange) => void;
   onSortChange: (sort: string) => void;
+  onPageChange: (page: number) => void;
 }
 
 const SearchFilters: React.FC<SearchFiltersProps> = ({
   onSearchChange,
   onPriceRangeChange,
   onSortChange,
+  onPageChange,
 }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [minPrice, setMinPrice] = useState("");
@@ -31,6 +33,7 @@ const SearchFilters: React.FC<SearchFiltersProps> = ({
 
   // Handle apply filters
   const handleApply = () => {
+    onPageChange(1);
     setLoading(true);
     setTimeout(() => {
       onSearchChange(searchTerm);
