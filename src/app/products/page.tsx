@@ -1,9 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { createProduct, getProducts } from "@/services/productService";
+import { useEffect, useState, useCallback } from "react";
+import { getProducts } from "@/services/productService";
 import { toast } from "sonner";
-import ProductForm from "@/components/ProductForm";
 import SearchFilters from "@/components/SearchFilters";
 import { Product } from "@/types/Product";
 import ProductList from "@/components/ProductList";
@@ -42,7 +41,7 @@ export default function ProductListPage() {
       .finally(() => setIsLoading(false));
   }, []);
 
-  const filterAndSortProducts = () => {
+  const filterAndSortProducts = useCallback(() => {
     // First apply filters
     const filtered = products.filter((product) => {
       const matchesSearch = product.name
@@ -72,25 +71,12 @@ export default function ProductListPage() {
     });
 
     setFilteredProducts(filtered);
-  };
+  }, [products, searchTerm, priceRange, sortOption]);
 
   // Filter and sort products whenever filters or products change
   useEffect(() => {
     filterAndSortProducts();
-  }, [products, searchTerm, priceRange, sortOption]);
-
-  // const handleAddProduct = async (
-  //   newProduct: Omit<Product, "id" | "createdAt">
-  // ) => {
-  //   try {
-  //     const addedProduct = await createProduct(newProduct);
-  //     setProducts((prev) => [...prev, addedProduct]);
-  //     return Promise.resolve();
-  //   } catch (error) {
-  //     console.error("Error adding product:", error);
-  //     return Promise.reject(error);
-  //   }
-  // };
+  }, [products, searchTerm, priceRange, sortOption, filterAndSortProducts]);
 
   return (
     <div className="max-w-7xl mx-auto">

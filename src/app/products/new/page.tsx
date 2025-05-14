@@ -1,12 +1,10 @@
- 
-"use client";
+ "use client";
 
 import { toast } from "sonner";
 import { createProduct } from "@/services/productService";
 import ProductForm from "../../../components/ProductForm";
-import { useRouter } from "next/navigation";
+
 export default function NewProductPage() {
-    const router = useRouter();
   
     const handleAddProduct = async (newProduct: {
       name: string;
@@ -20,7 +18,6 @@ export default function NewProductPage() {
         toast.success("Produto adicionado", {
           description: "O produto foi adicionado com sucesso!",
         });
-        // router.push("/"); // Redireciona para a página de listagem após adicionar
         return Promise.resolve();
       } catch (error) {
         console.error("Error adding product:", error);

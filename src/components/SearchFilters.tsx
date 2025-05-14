@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Search } from "lucide-react";
 import { Button } from "./ui/button";
+import { Slider } from "./ui/slider";
+import { Input } from "./ui/input";
 
 interface PriceRange {
   min: number;
@@ -14,6 +16,9 @@ interface SearchFiltersProps {
   onPageChange: (page: number) => void;
 }
 
+const MIN_PRICE = 0;
+const MAX_PRICE = 10000;
+
 const SearchFilters: React.FC<SearchFiltersProps> = ({
   onSearchChange,
   onPriceRangeChange,
@@ -21,8 +26,7 @@ const SearchFilters: React.FC<SearchFiltersProps> = ({
   onPageChange,
 }) => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [minPrice, setMinPrice] = useState("");
-  const [maxPrice, setMaxPrice] = useState("");
+  const [priceRange, setPriceRange] = useState<[number, number]>([MIN_PRICE, MAX_PRICE]);
   const [sortBy, setSortBy] = useState("name-asc");
   const [loading, setLoading] = useState(false);
 
@@ -37,12 +41,24 @@ const SearchFilters: React.FC<SearchFiltersProps> = ({
     setLoading(true);
     setTimeout(() => {
       onSearchChange(searchTerm);
-      const min = minPrice === "" ? 0 : parseFloat(minPrice);
-      const max = maxPrice === "" ? Infinity : parseFloat(maxPrice);
-      onPriceRangeChange({ min, max });
+      onPriceRangeChange({ min: priceRange[0], max: priceRange[1] });
       onSortChange(sortBy);
       setLoading(false);
     }, 2000);
+  };
+
+  // Sync input min/max with slider
+  const handleMinInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let min = Number(e.target.value);
+    if (isNaN(min) || min < MIN_PRICE) min = MIN_PRICE;
+    if (min > priceRange[1]) min = priceRange[1];
+    setPriceRange([min, priceRange[1]]);
+  };
+  const handleMaxInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let max = Number(e.target.value);
+    if (isNaN(max) || max > MAX_PRICE) max = MAX_PRICE;
+    if (max < priceRange[0]) max = priceRange[0];
+    setPriceRange([priceRange[0], max]);
   };
 
   return (
@@ -68,23 +84,36 @@ const SearchFilters: React.FC<SearchFiltersProps> = ({
         <label className="block text-sm font-medium text-gray-700">
           Faixa de Preço
         </label>
-        <div className="flex space-x-2">
-          <div className="w-1/2">
-            <input
-              type="number"
-              className="w-full p-2.5 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
-              placeholder="Mínimo"
-              value={minPrice}
-              onChange={(e) => setMinPrice(e.target.value)}
-            />
+        <div className="flex flex-col items-center space-y-2">
+          <Slider
+            min={MIN_PRICE}
+            max={MAX_PRICE}
+            value={priceRange}
+            onValueChange={(values: number[]) => setPriceRange([values[0], values[1]])}
+            className="w-full"
+          />
+          <div className="flex justify-between w-full text-xs text-gray-600">
+            <span>Mín: R$ {priceRange[0]}</span>
+            <span>Máx: R$ {priceRange[1] === MAX_PRICE ? '∞' : `R$ ${priceRange[1]}`}</span>
           </div>
-          <div className="w-1/2">
-            <input
+          <div className="flex w-full gap-2 mt-2">
+            <Input
               type="number"
-              className="w-full p-2.5 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+              min={MIN_PRICE}
+              max={priceRange[1]}
+              value={priceRange[0]}
+              onChange={handleMinInput}
+              className="w-1/2"
+              placeholder="Mínimo"
+            />
+            <Input
+              type="number"
+              min={priceRange[0]}
+              max={MAX_PRICE}
+              value={priceRange[1]}
+              onChange={handleMaxInput}
+              className="w-1/2"
               placeholder="Máximo"
-              value={maxPrice}
-              onChange={(e) => setMaxPrice(e.target.value)}
             />
           </div>
         </div>
