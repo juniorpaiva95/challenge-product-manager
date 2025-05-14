@@ -1,6 +1,6 @@
-
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Search } from "lucide-react";
+import { Button } from "./ui/button";
 
 interface PriceRange {
   min: number;
@@ -22,30 +22,24 @@ const SearchFilters: React.FC<SearchFiltersProps> = ({
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
   const [sortBy, setSortBy] = useState("name-asc");
-
-  // Debounce search term
-  useEffect(() => {
-    const handler = setTimeout(() => {
-      onSearchChange(searchTerm);
-    }, 300);
-
-    return () => {
-      clearTimeout(handler);
-    };
-  }, [searchTerm, onSearchChange]);
-
-  // Handle price range changes
-  const handlePriceChange = () => {
-    const min = minPrice === "" ? 0 : parseFloat(minPrice);
-    const max = maxPrice === "" ? Infinity : parseFloat(maxPrice);
-    onPriceRangeChange({ min, max });
-  };
+  const [loading, setLoading] = useState(false);
 
   // Handle sort change
   const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const value = e.target.value;
-    setSortBy(value);
-    onSortChange(value);
+    setSortBy(e.target.value);
+  };
+
+  // Handle apply filters
+  const handleApply = () => {
+    setLoading(true);
+    setTimeout(() => {
+      onSearchChange(searchTerm);
+      const min = minPrice === "" ? 0 : parseFloat(minPrice);
+      const max = maxPrice === "" ? Infinity : parseFloat(maxPrice);
+      onPriceRangeChange({ min, max });
+      onSortChange(sortBy);
+      setLoading(false);
+    }, 2000);
   };
 
   return (
@@ -79,7 +73,6 @@ const SearchFilters: React.FC<SearchFiltersProps> = ({
               placeholder="Mínimo"
               value={minPrice}
               onChange={(e) => setMinPrice(e.target.value)}
-              onBlur={handlePriceChange}
             />
           </div>
           <div className="w-1/2">
@@ -89,7 +82,6 @@ const SearchFilters: React.FC<SearchFiltersProps> = ({
               placeholder="Máximo"
               value={maxPrice}
               onChange={(e) => setMaxPrice(e.target.value)}
-              onBlur={handlePriceChange}
             />
           </div>
         </div>
@@ -113,6 +105,9 @@ const SearchFilters: React.FC<SearchFiltersProps> = ({
           <option value="date-asc">Mais antigos</option>
         </select>
       </div>
+      <Button className="w-full bg-blue-500 hover:bg-blue-600 text-white" onClick={handleApply} disabled={loading}>
+        {loading ? "Aplicando..." : "Aplicar"}
+      </Button>
     </div>
   );
 };

@@ -1,20 +1,19 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useProductStore } from "@/store/useProductStore";
 import { createProduct, getProducts } from "@/services/productService";
 import { toast } from "sonner";
-import ProductForm from "../../components/ProductForm";
-import SearchFilters from "../../components/SearchFilters";
-import { Product } from "../../types/Product";
-import ProductList from "../../components/ProductList";
-import { Pagination } from "../../components/ui/pagination";
+import ProductForm from "@/components/ProductForm";
+import SearchFilters from "@/components/SearchFilters";
+import { Product } from "@/types/Product";
+import ProductList from "@/components/ProductList";
+import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
+import { usePagination } from "@/hooks/use-pagination";
 
 const PRODUCTS_PER_PAGE = 6;
 
 export default function ProductListPage() {
   const [products, setProducts] = useState<Product[]>([]);
-  const setCurrentPage = useProductStore((state) => state.setCurrentPage);
 
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -24,8 +23,12 @@ export default function ProductListPage() {
   const [priceRange, setPriceRange] = useState({ min: 0, max: Infinity });
   const [sortOption, setSortOption] = useState("name-asc");
 
-  const currentPage = useProductStore((state) => state.currentPage);
-  const totalPages = Math.ceil(filteredProducts.length / PRODUCTS_PER_PAGE);
+  // Paginação
+  const { currentPage, totalPages, goToPage, startIdx, endIdx } = usePagination(
+    filteredProducts.length,
+    PRODUCTS_PER_PAGE
+  );
+  const paginatedProducts = filteredProducts.slice(startIdx, endIdx);
 
   useEffect(() => {
     setIsLoading(true);
@@ -76,12 +79,6 @@ export default function ProductListPage() {
     filterAndSortProducts();
   }, [products, searchTerm, priceRange, sortOption]);
 
-  const handlePageChange = (page: number) => {
-    if (page >= 1 && page <= totalPages) {
-      setCurrentPage(page);
-    }
-  };
-
   const handleAddProduct = async (
     newProduct: Omit<Product, "id" | "createdAt">
   ) => {
@@ -130,37 +127,55 @@ export default function ProductListPage() {
             </div>
           </div>
 
-          <ProductList products={filteredProducts} isLoading={isLoading} />
+          <ProductList products={paginatedProducts} isLoading={isLoading} />
 
-          <Pagination className="mt-10">
-            <button
-              className="px-3 py-1 mx-1 rounded border border-gray-300 bg-white hover:bg-gray-100 disabled:opacity-50"
-              onClick={() => handlePageChange(currentPage - 1)}
-              disabled={currentPage === 1}
-            >
-              Anterior
-            </button>
-            {Array.from({ length: totalPages }, (_, i) => (
-              <button
-                key={i + 1}
-                className={`px-3 py-1 mx-1 rounded border border-gray-300 ${
-                  currentPage === i + 1
-                    ? "bg-blue-600 text-white"
-                    : "bg-white hover:bg-gray-100"
-                }`}
-                onClick={() => handlePageChange(i + 1)}
-              >
-                {i + 1}
-              </button>
-            ))}
-            <button
-              className="px-3 py-1 mx-1 rounded border border-gray-300 bg-white hover:bg-gray-100 disabled:opacity-50"
-              onClick={() => handlePageChange(currentPage + 1)}
-              disabled={currentPage === totalPages}
-            >
-              Próxima
-            </button>
+          {totalPages > 1 && (
+        <div className="mt-8">
+          <Pagination>
+            <PaginationContent>
+              <PaginationItem>
+                <PaginationPrevious 
+                  onClick={() => goToPage(Math.max(1, currentPage - 1))}
+                  className={
+                    currentPage === 1
+                      ? 'pointer-events-none opacity-50'
+                      : 'cursor-pointer text-blue-600 hover:text-blue-700'
+                  }
+                />
+              </PaginationItem>
+              {Array.from({ length: totalPages }, (_, index) => index + 1).map((pageNumber) => {
+                const isActive = pageNumber === currentPage;
+                return (
+                  <PaginationItem key={`page-${pageNumber}`}>
+                    <PaginationLink 
+                      isActive={isActive}
+                      onClick={() => goToPage(pageNumber as number)}
+                      className={
+                        `cursor-pointer px-3 py-1 rounded transition ` +
+                        (isActive
+                          ? 'bg-blue-600 text-white border border-blue-600 shadow'
+                          : 'bg-white text-blue-600 border border-blue-100 hover:bg-blue-50 hover:border-blue-300')
+                      }
+                    >
+                      {pageNumber}
+                    </PaginationLink>
+                  </PaginationItem>
+                );
+              })}
+              <PaginationItem>
+                <PaginationNext 
+                  onClick={() => goToPage(Math.min(totalPages, currentPage + 1))}
+                  className={
+                    currentPage === totalPages
+                      ? 'pointer-events-none opacity-50'
+                      : 'cursor-pointer text-blue-600 hover:text-blue-700'
+                  }
+                />
+              </PaginationItem>
+            </PaginationContent>
           </Pagination>
+        </div>
+      )}  
         </div>
       </div>
     </div>
